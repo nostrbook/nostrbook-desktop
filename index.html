@@ -1,0 +1,165 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+
+<head>
+    <meta charset="UTF-8">
+    <title>nostrbook</title>
+    <style>
+        body {
+            background-color: rgba(0, 0, 0, 0);
+            overflow: hidden; /* 防止body自带滚动条 */
+            margin: 0;
+        }
+
+        .win {
+            margin: 0;
+            height: 100vh;
+            background: linear-gradient(to right, #6620FC, #f3e5f5);
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            padding-top: 40px; /* 避免被 titlebar 挡住 */
+            overflow: hidden; /* 防止body自带滚动条 */
+            border-radius: 10px;
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1); /* 添加阴影效果 */
+            position: relative; /* 确保内部元素可以相对定位 */
+        }
+
+        .titlebar {
+            -webkit-app-region: drag;
+            height: 40px;
+            width: 100%;
+            position: absolute;
+            top: 0;
+            left: 0;
+            z-index: 9999;
+            display: flex;
+            justify-content: flex-end;
+            align-items: center;
+           
+        }
+
+        .controls {
+            display: flex;
+            align-items: center;
+            margin-right: 20px;
+        }
+
+        .control-btn {
+            width: 12px;
+            height: 12px;
+            border-radius: 50%;
+            margin-left: 10px;
+            cursor: pointer;
+            outline: none;
+            border: none;
+            -webkit-app-region: no-drag;
+            transition: background-color 0.2s ease-in-out;
+        }
+
+        .control-btn.red { background-color: #ff6b57; }
+        .control-btn.yellow { background-color: #fabe58; }
+        .control-btn.green { background-color: #62c958; }
+
+        .control-btn:hover {
+            opacity: 0.8;
+        }
+
+        .menu {
+            position: absolute;
+            left: 10px;
+            top: 50px;
+            width: 60px;
+            display: flex;
+            flex-direction: column;
+            justify-content: flex-start;
+            align-items: center;
+            padding: 10px 0;
+            color: white;
+            gap: 30px;
+        }
+
+        .menu-item {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+
+        .menu-item svg {
+            fill: white;
+            width: 28px;
+            height: 28px;
+            margin-bottom: 2px;
+            transition: transform 0.2s;
+        }
+
+        .menu-item:hover svg {
+            transform: scale(1.1);
+        }
+
+        .content-box {
+            position: absolute;
+            left: 80px;
+            top: 50px;
+            bottom: 50px; /* 👈 修改：让底部空出一点距离 */
+            right: 10px;
+            background-color: white;
+            border-radius: 16px;
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+            overflow: auto;
+            padding: 20px;
+        }
+
+        h1 {
+            text-align: center;
+            color: #4a148c;
+            font-weight: bold;
+        }
+    </style>
+</head>
+
+<body>
+    <div class="win">
+        <!-- 新增标题栏和控制按钮 -->
+        <div class="titlebar">
+            <div class="controls">
+                <button id="minimize" class="control-btn green"></button>
+                <button id="maximize" class="control-btn yellow"></button>
+                <button id="close" class="control-btn red"></button>
+            </div>
+        </div>
+
+        <!-- 其他页面内容 -->
+        <div class="menu">
+            <div class="menu-item">
+                <!-- 第一个菜单项的SVG图标 -->
+                <svg viewBox="0 0 24 24">
+                    <path d="M3 18h18v-2H3v2zm0-5h18v-2H3v2zm0-7v2h18V6H3z"/>
+                </svg>
+                <span>菜单1</span>
+            </div>
+            <div class="menu-item">
+                <!-- 第二个菜单项的SVG图标 -->
+                <svg viewBox="0 0 24 24">
+                    <path d="M19 3H5c-1.11 0-2 .9-2 2v14c0 1.1.89 2 2 2h14c1.1 0 2-.9 2-2V5c0-1.1-.9-2-2-2zm-9 14l-5-5h3V6h2v6h3l-5 5z"/>
+                </svg>
+                <span>菜单2</span>
+            </div>
+            <div class="menu-item">
+                <!-- 第三个菜单项的SVG图标 -->
+                <svg viewBox="0 0 24 24">
+                    <path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm-1 15l-5-5h2v-3h6v3h2l-5 5z"/>
+                </svg>
+                <span>菜单3</span>
+            </div>
+        </div>
+
+        <div class="content-box">
+            <h1>欢迎来到 nostrbook.com</h1>
+        </div>
+    </div>
+    <script src="renderer.js"></script>
+</body>
+
+</html>
