@@ -55,7 +55,11 @@
             outline: none;
             border: none;
             -webkit-app-region: no-drag;
-            transition: background-color 0.2s ease-in-out;
+            transition: all 0.2s ease-in-out;
+            position: relative;
+            display: flex;
+            justify-content: center;
+            align-items: center;
         }
 
         .control-btn.red { background-color: #ff6b57; }
@@ -64,6 +68,53 @@
 
         .control-btn:hover {
             opacity: 0.8;
+        }
+
+        /* 添加控制按钮的标记 */
+        .control-btn::before {
+            content: '';
+            position: absolute;
+            display: none;
+            background-color: white;
+        }
+
+        .control-btn:hover::before {
+            display: block;
+        }
+
+        /* 关闭按钮的标记 - "×" */
+        #close::before {
+            width: 6px;
+            height: 1px;
+            transform: rotate(45deg);
+        }
+
+        #close::after {
+            content: '';
+            position: absolute;
+            display: none;
+            width: 6px;
+            height: 1px;
+            background-color: white;
+            transform: rotate(-45deg);
+        }
+
+        #close:hover::after {
+            display: block;
+        }
+
+        /* 最小化按钮的标记 - "-" */
+        #minimize::before {
+            width: 6px;
+            height: 1px;
+        }
+
+        /* 最大化按钮的标记 - "□" */
+        #maximize::before {
+            width: 5px;
+            height: 5px;
+            border: 1px solid white;
+            background-color: transparent;
         }
 
         .menu {
@@ -124,8 +175,8 @@
         <!-- 新增标题栏和控制按钮 -->
         <div class="titlebar">
             <div class="controls">
-                <button id="minimize" class="control-btn green"></button>
-                <button id="maximize" class="control-btn yellow"></button>
+                <button id="maximize" class="control-btn green"></button>
+                <button id="minimize" class="control-btn yellow"></button>
                 <button id="close" class="control-btn red"></button>
             </div>
         </div>
